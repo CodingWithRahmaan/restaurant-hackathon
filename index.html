@@ -1,71 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Digital Clock UI</title>
-    <style>
-        body {
-            background: #222;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .clock {
-            background: #111;
-            padding: 40px 60px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            display: flex;
-            gap: 10px;
-            margin-bottom: 40px;
-        }
-        .digit {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 64px;
-            color: #00ffea;
-            background: #222;
-            border-radius: 10px;
-            padding: 10px 18px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            min-width: 60px;
-            text-align: center;
-        }
-        .colon {
-            font-size: 64px;
-            color: #00ffea;
-            align-self: center;
-        }
-        .btn {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 24px;
-            color: #00ffea;
-            background: #222;
-            border-radius: 10px;
-            padding: 10px 40px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            border: none;
-            cursor: pointer;
-            transition: background 0.2s, color 0.2s;
-            margin-top: 10px;
-        }
-        .btn:hover {
-            background: #00ffea;
-            color: #222;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login & Signup Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    .container {
+      width: 370px;
+      background: rgba(255,255,255,0.95);
+      /* padding: 38px 32px 28px 32px; */
+      padding: 40px 70px;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+      position: relative;
+      transition: box-shadow 0.3s;
+    }
+    .container:hover {
+      box-shadow: 0 12px 40px 0 rgba(31,38,135,0.25);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 28px;
+      color: #2d3a4b;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 22px;
+    }
+    .input-group i {
+      position: absolute;
+      left: -25px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #b0b8c1;
+      font-size: 16px;
+    }
+    .input-group input {
+      width: 100%;
+      /* padding: 12px 12px 12px 38px; */
+      padding:  15px 0px;
+      border: 1.5px solid #e0e4ea;
+      border-radius: 7px;
+      background: #f7fafd;
+      font-size: 15px;
+      transition: border 0.2s;
+    }
+    .input-group input:focus { 
+      border: 1.5px solid #74ebd5;
+      outline: none;
+      background: #fff;
+    }
+
+    .btn {
+      width: 100%;
+      background: linear-gradient(90deg, #74ebd5 0%, #ACB6E5 100%);
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(116,235,213,0.10);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #ACB6E5 0%, #74ebd5 100%);
+      box-shadow: 0 4px 16px rgba(116,235,213,0.18);
+    }
+
+    .toggle {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 15px;
+      color: #6c7a89;
+    }
+    .toggle a {
+      color: #74ebd5;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .toggle a:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: 95vw;
+        padding: 22px 8vw 18px 8vw;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="clock">
-        <div id="hour" class="digit">00</div>
-        <div class="colon">:</div>
-        <div id="min" class="digit">00</div>
-        <div class="colon">:</div>
-        <div id="sec" class="digit">00</div>
+
+  <div class="container" id="loginBox">
+    <h2>Login</h2>
+    <form>
+      <div class="input-group">
+        <i class="fa fa-envelope"></i>
+        <input placeholder="Email or Username " required>
+      </div>
+      <div class="input-group">
+        <i class="fa fa-lock"></i>
+        <input type="password" placeholder="Password" required>
+      </div>
+      <button class="btn" type="submit">Login</button>
+    </form>
+    <div class="toggle">
+      Don't have an account? <a href="#" onclick="showSignup()">Sign up</a>
     </div>
-    <button class="btn" id="start" onclick="start()">start</button>
-    <script src="app.js"></script>
+  </div>
+
+  <div class="container" id="signupBox" style="display:none;">
+    <h2>Sign Up</h2>
+    <form>
+      <div class="input-group">
+        <i class="fa fa-user"></i>
+        <input type="text" placeholder="Full Name" required>
+      </div>
+      <div class="input-group">
+        <i class="fa fa-envelope"></i>
+        <input id="signEmail" placeholder="Email or Username" required>
+      </div>
+      <div class="input-group">
+        <i class="fa fa-lock"></i>
+        <input type="password" placeholder="Password" required>
+      </div>
+      <button class="btn" type="submit">Sign Up</button>
+    </form>
+    <div class="toggle">
+      Already have an account? <a href="#" onclick="showLogin()">Login</a>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script src="app.js"></script>
+
+  
+  
+
+
+
+
+
+
 </body>
 </html>
