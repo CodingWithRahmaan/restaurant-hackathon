@@ -6,107 +6,114 @@
   <title>Login & Signup Page</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-  body {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f7d9aa 0%, #fdd9b5 100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Segoe UI', Arial, sans-serif;
-}
+    body {
+      min-height: 100vh;
+      background: #1c1c1c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #d9d7ce;
+    }
 
-.container {
-  width: 370px;
-  background: rgba(255, 255, 255, 0.98);
-  padding: 40px 40px;
-  border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  position: relative;
-  transition: box-shadow 0.3s ease-in-out;
-}
-.container:hover {
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-}
+    .container {
+      width: 370px;
+      background: #282828;
+      padding: 40px 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(201, 166, 107, 0.15);
+      position: relative;
+      transition: box-shadow 0.3s ease-in-out;
+      border: 1px solid #3a3a3a;
+    }
 
-h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #8b4513;
-  letter-spacing: 1px;
-  font-weight: 700;
-}
+    .container:hover {
+      box-shadow: 0 12px 40px rgba(201, 166, 107, 0.25);
+    }
 
-.input-group {
-  position: relative;
-  margin-bottom: 20px;
-}
-.input-group i {
-  position: absolute;
-  left: -25px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #d8a86e;
-  font-size: 16px;
-}
-.input-group input {
-  width: 100%;
-  padding: 14px 0px;
-  border: 1.5px solid #f1d5b2;
-  border-radius: 8px;
-  background: #fff9f3;
-  font-size: 15px;
-  transition: border 0.2s;
-}
-.input-group input:focus {
-  border: 1.5px solid #e29c67;
-  outline: none;
-  background: #fff;
-}
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #c9a66b;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
 
-.btn {
-  width: 100%;
-  background: linear-gradient(90deg, #e29c67 0%, #ffb580 100%);
-  color: #fff;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 8px rgba(255, 181, 128, 0.25);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-.btn:hover {
-  background: linear-gradient(90deg, #ffb580 0%, #e29c67 100%);
-  box-shadow: 0 4px 16px rgba(255, 181, 128, 0.35);
-}
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
 
-.toggle {
-  text-align: center;
-  margin-top: 12px;
-  font-size: 15px;
-  color: #7d5a3a;
-}
-.toggle a {
-  color: #e29c67;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.2s;
-}
-.toggle a:hover {
-  color: #b04c00;
-  text-decoration: underline;
-}
+    .input-group i {
+      position: absolute;
+      left: -25px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #c9a66b;
+      font-size: 16px;
+    }
 
-@media (max-width: 480px) {
-  .container {
-    width: 92vw;
-    padding: 22px 8vw;
-  }
-}
+    .input-group input {
+      width: 100%;
+      padding: 14px 0px;
+      border: 1.5px solid #3a3a3a;
+      border-radius: 8px;
+      background: #1c1c1c;
+      font-size: 15px;
+      color: #f5f1e9;
+    }
 
+    .input-group input:focus {
+      border: 1.5px solid #c9a66b;
+      outline: none;
+      background: #242424;
+    }
+
+    .btn {
+      width: 100%;
+      background: transparent;
+      color: #c9a66b;
+      padding: 12px;
+      border: 2px solid #c9a66b;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(201, 166, 107, 0.2);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #c9a66b;
+      color: #1c1c1c;
+      box-shadow: 0 4px 16px rgba(201, 166, 107, 0.35);
+    }
+
+    .toggle {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 15px;
+      color: #aaa08a;
+    }
+
+    .toggle a {
+      color: #c9a66b;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .toggle a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: 92vw;
+        padding: 22px 8vw;
+      }
+    }
   </style>
 </head>
 <body>
@@ -116,7 +123,7 @@ h2 {
     <form>
       <div class="input-group">
         <i class="fa fa-envelope"></i>
-        <input placeholder="Email or Username " required>
+        <input placeholder="Email or Username" required>
       </div>
       <div class="input-group">
         <i class="fa fa-lock"></i>
@@ -150,17 +157,12 @@ h2 {
       Already have an account? <a href="#" onclick="showLogin()">Login</a>
     </div>
   </div>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <script src="app.js"></script>
-
-  
-  
-
-
-
-
-
+  <script src="app.js">
+    
+    
+  </script>
 
 </body>
 </html>
