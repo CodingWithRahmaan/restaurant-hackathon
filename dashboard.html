@@ -3,291 +3,420 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Restaurant Landing Page</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<title>Golden Spoon - Luxury Dining</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
 <style>
   /* Reset */
   * {
     margin: 0; padding: 0; box-sizing: border-box;
   }
-
   body, html {
     height: 100%;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(135deg, #f7d9aa 0%, #fdd9b5 100%);
-    color: #8b4513;
+    font-family: 'Lato', sans-serif;
+    background-color: #1c1c1c;
+    color: #f5f1e9;
+    scroll-behavior: smooth;
   }
 
+  /* Container */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Header */
   header {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 15px 40px;
+    position: sticky;
+    top: 0; left: 0; right: 0;
+    background: rgb(28, 28, 28);
+    backdrop-filter: saturate(180%) blur(20px);
+    padding: 25px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 10;
+    z-index: 1000;
+    border-bottom: 1px solid #3e3e3e;
   }
-
   header .logo {
+    font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: 24px;
-    letter-spacing: 2px;
+    font-size: 36px;
+    color: #c9a66b;
+    letter-spacing: 3px;
+    user-select: none;
     cursor: default;
   }
-
   nav a {
-    color: #8b4513;
+    color: #d9d7ce;
     text-decoration: none;
-    margin-left: 30px;
-    font-weight: 600;
+    margin-left: 40px;
+    font-weight: 700;
+    font-size: 17px;
     transition: color 0.3s ease;
+    position: relative;
   }
-  nav a:hover {
-    color: #e29c67;
+  nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2.5px;
+    background: #c9a66b;
+    bottom: -6px;
+    left: 0;
+    transition: width 0.3s ease;
+  }
+  nav a:hover,
+  nav a:focus {
+    color: #c9a66b;
+  }
+  nav a:hover::after,
+  nav a:focus::after {
+    width: 100%;
   }
 
   main {
-    margin-top: 70px; /* header height + some spacing */
+    padding-top: 110px;
+    padding-bottom: 70px;
   }
 
-  /* Hero carousel styles */
+  /* Hero Section */
   .hero {
-    position: relative;
-    width: 100vw;
-    height: 80vh;
-    overflow: hidden;
-    max-height: 700px;
-    border-radius: 15px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-  }
-
-  .slides {
     display: flex;
-    width: 500%; /* 5 slides */
-    height: 100%;
-    transition: transform 0.5s ease-in-out;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    background: #282828;
+    border-radius: 24px;
+    box-shadow: 0 12px 45px rgba(201, 166, 107, 0.25);
+    padding: 60px 40px;
   }
-
-  .slide {
-    width: 20%; /* 1/5th */
-    height: 100%;
-    flex-shrink: 0;
-    background-size: cover;
-    background-position: center;
+  .hero-text {
+    flex: 1 1 480px;
   }
-
-  /* Navigation buttons */
-  .nav-buttons {
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 12px;
+  .hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 54px;
+    color: #c9a66b;
+    margin-bottom: 22px;
+    line-height: 1.1;
+    letter-spacing: 3px;
   }
-
-  .nav-buttons button {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: none;
-    background: #e29c67aa;
+  .hero-text p {
+    font-size: 20px;
+    color: #d9d7ce;
+    margin-bottom: 40px;
+    max-width: 460px;
+    line-height: 1.5;
+  }
+  .btn-primary {
+    font-weight: 700;
+    font-size: 18px;
+    padding: 16px 48px;
+    border-radius: 35px;
+    border: 2.5px solid #c9a66b;
+    background: transparent;
+    color: #c9a66b;
     cursor: pointer;
-    transition: background 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 0 15px rgba(201, 166, 107, 0.4);
+    transition: background-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+  }
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background-color: #c9a66b;
+    color: #1c1c1c;
+    box-shadow: 0 0 25px rgba(201, 166, 107, 0.8);
+  }
+  .hero-image {
+    flex: 1 1 480px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(201, 166, 107, 0.15);
+  }
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 24px;
+    object-fit: cover;
+    filter: brightness(0.95);
   }
 
-  .nav-buttons button.active,
-  .nav-buttons button:hover {
-    background: #e29c67;
-  }
-
-  /* Main content */
-  .content {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 0 20px;
+  /* Menu Section */
+  #menu {
+    margin-top: 80px;
     text-align: center;
   }
-  .content h2 {
+  #menu h2 {
+    font-family: 'Playfair Display', serif;
     font-weight: 700;
-    margin-bottom: 15px;
+    font-size: 44px;
+    margin-bottom: 18px;
+    color: #c9a66b;
+    letter-spacing: 2px;
   }
-  .content p {
-    font-size: 16px;
-    color: #7d5a3a;
+  #menu p {
+    color: #d9d7ce;
+    font-size: 18px;
+    max-width: 680px;
+    margin: 0 auto 50px auto;
     line-height: 1.5;
+  }
+  .menu-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 35px;
+    padding: 0 10px;
+  }
+  .card {
+    background: #282828;
+    border-radius: 24px;
+    box-shadow: 0 8px 30px rgba(201, 166, 107, 0.12);
+    overflow: hidden;
+    border: 1px solid #3a3a3a;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: default;
+  }
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 45px rgba(201, 166, 107, 0.35);
+  }
+  .card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-bottom: 1px solid #3a3a3a;
+    filter: brightness(0.9);
+  }
+  .card-content {
+    padding: 25px 28px 35px 28px;
+    text-align: left;
+  }
+  .card-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    margin-bottom: 12px;
+    color: #c9a66b;
+  }
+  .card-content p {
+    font-size: 15.5px;
+    color: #d9d7ce;
+    line-height: 1.5;
+  }
+  .price {
+    margin-top: 16px;
+    font-weight: 700;
+    font-size: 20px;
+    color: #c9a66b;
+  }
+
+  /* About Section */
+  #about {
+    max-width: 720px;
+    margin: 90px auto 80px auto;
+    text-align: center;
+  }
+  #about h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    color: #c9a66b;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+  }
+  #about p {
+    color: #d9d7ce;
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  /* Contact Section */
+  #contact {
+    max-width: 720px;
+    margin: 0 auto 80px auto;
+    text-align: center;
+  }
+  #contact h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    color: #c9a66b;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+  }
+  #contact p {
+    color: #d9d7ce;
+    font-size: 18px;
+    line-height: 1.7;
+  }
+  #contact a {
+    color: #c9a66b;
+    text-decoration: none;
+    font-weight: 700;
+  }
+  #contact a:hover,
+  #contact a:focus {
+    text-decoration: underline;
   }
 
   /* Footer */
   footer {
-    background: rgba(255, 255, 255, 0.95);
     text-align: center;
-    padding: 15px 20px;
-    color: #8b4513;
-    font-size: 14px;
-    border-top: 1px solid #e29c67aa;
-    box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
-    margin-top: 40px;
+    padding: 28px 20px;
+    border-top: 1px solid #3a3a3a;
+    color: #7b7156;
+    font-size: 15px;
     font-weight: 600;
-  }
-
-  .footer-container p {
-    margin: 4px 0;
+    letter-spacing: 1px;
   }
 
   /* Responsive */
- /* ...existing code... */
-
-@media (max-width: 900px) {
-  .content {
-    max-width: 98vw;
-    padding: 0 8px;
+  @media (max-width: 900px) {
+    header {
+      padding: 20px 15px;
+    }
+    nav a {
+      margin-left: 28px;
+      font-size: 15px;
+    }
+    .hero {
+      flex-direction: column;
+      padding: 45px 25px;
+      gap: 35px;
+    }
+    .hero-text h1 {
+      font-size: 38px;
+    }
+    .hero-text p {
+      font-size: 17px;
+      max-width: 100%;
+    }
+    .btn-primary {
+      font-size: 16px;
+      padding: 14px 40px;
+    }
+    .menu-cards {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
+    }
   }
-  .hero {
-    height: 40vh;
-    min-height: 220px;
-    max-height: none;
-    border-radius: 0;
-    box-shadow: none;
+  @media (max-width: 600px) {
+    header {
+      flex-direction: column;
+      padding: 18px 10px;
+    }
+    nav {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    nav a {
+      margin-left: 0;
+      font-size: 14px;
+    }
+    .hero-text h1 {
+      font-size: 30px;
+    }
+    .hero-text p {
+      font-size: 16px;
+    }
+    .btn-primary {
+      font-size: 14px;
+      padding: 12px 36px;
+    }
+    .menu-cards {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 0 5px;
+    }
+    footer {
+      font-size: 13px;
+      padding: 20px 10px;
+    }
   }
-  .slide {
-    background-size: cover;
-    background-position: center;
-  }
-}
-
-@media (max-width: 600px) {
-  header {
-    padding: 10px 8px;
-    flex-direction: column;
-    gap: 8px;
-  }
-  nav {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 0;
-  }
-  nav a {
-    margin: 0 8px;
-    font-size: 14px;
-  }
-  .hero {
-    height: 32vh;
-    min-height: 140px;
-    max-height: none;
-    border-radius: 0;
-    box-shadow: none;
-  }
-  .slides {
-    width: 500%;
-    min-width: 500vw;
-    height: 100%;
-    transition: transform 0.5s ease-in-out;
-  }
-  .slide {
-    width: 20vw;
-    min-width: 100vw;
-    height: 100%;
-  }
-  .nav-buttons {
-    bottom: 8px;
-    gap: 6px;
-  }
-  .nav-buttons button {
-    width: 18px;
-    height: 18px;
-  }
-  .content {
-    padding: 0 4px;
-    font-size: 15px;
-  }
-  footer {
-    padding: 10px 4px;
-    font-size: 13px;
-  }
-}
-
-/* Optional: Hide scrollbars for slides on mobile */
-@media (max-width: 600px) {
-  .slides {
-    scrollbar-width: none; /* Firefox */
-  }
-  .slides::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
-  }
-}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">Delicious Bites</div>
-  <nav>
+  <div class="logo" aria-label="Golden Spoon Restaurant Logo">Golden Spoon</div>
+  <nav aria-label="Primary navigation">
     <a href="#menu">Menu</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
 
-<main>
-  <section class="hero">
-    <div class="slides" id="slides">
-      <div class="slide" style="background-image: url('https://source.unsplash.com/1200x700/?food,1');"></div>
-      <div class="slide" style="background-image: url('https://source.unsplash.com/1200x700/?food,2');"></div>
-      <div class="slide" style="background-image: url('https://source.unsplash.com/1200x700/?food,3');"></div>
-      <div class="slide" style="background-image: url('https://source.unsplash.com/1200x700/?food,4');"></div>
-      <div class="slide" style="background-image: url('https://source.unsplash.com/1200x700/?food,5');"></div>
+<main class="container">
+  <section class="hero" aria-label="Welcome section">
+    <div class="hero-text">
+      <h1>Welcome to Golden Spoon</h1>
+      <p>Discover exquisite tastes and fine dining experiences crafted to perfection just for you.</p>
+      <a href="#menu" class="btn-primary">View Menu</a>
     </div>
-
-    <div class="nav-buttons" id="nav-buttons">
-      <button class="active"></button>
-      <button></button>
-      <button></button>
-      <button></button>
-      <button></button>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80" alt="Luxury plated food dish" />
     </div>
   </section>
 
-  <section class="content" id="menu">
-    <h2>Welcome to Delicious Bites</h2>
-    <p>Enjoy a perfect blend of traditional and modern cuisines prepared fresh daily with love.</p>
-  </section>
+  <section id="menu" aria-label="Menu section">
+    <h2>Signature Dishes</h2>
+    <p>Handpicked dishes that define our culinary artistry and passion.</p>
+    <div class="menu-cards">
+      <article class="card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1543353071-087092ec3937?auto=format&fit=crop&w=400&q=80" alt="Seared Salmon with herbs" />
+        <div class="card-content">
+          <h3>Seared Salmon</h3>
+          <p>Fresh Atlantic salmon seared to perfection with lemon herb butter.</p>
+          <div class="price">$32</div>
+        </div>
+      </article>
+      <article class="card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Tender Wagyu Steak" />
+        
+        <!-- !-- Continuing from last code, just add inside <main class="container"> below existing sections -->
 
-  <footer>
-    <div class="footer-container">
-      <p>© 2025 Delicious Bites. All rights reserved.</p>
-      <p>Contact us: +123 456 7890 | info@deliciousbites.com</p>
-    </div>
-  </footer>
+<!-- Testimonials Section -->
+<section id="testimonials" aria-label="Customer Testimonials" style="margin-top: 80px; text-align:center;">
+  <h2 style="font-family:'Playfair Display', serif; font-size: 38px; color: #c9a66b; margin-bottom: 25px; letter-spacing: 2px;">What Our Guests Say</h2>
+  <div style="display: flex; gap: 30px; flex-wrap: wrap; justify-content: center;">
+    <blockquote tabindex="0" style="background:#282828; padding: 25px 30px; border-radius: 20px; max-width: 320px; box-shadow: 0 8px 30px rgba(201,166,107,0.12); color:#d9d7ce; font-style: italic; font-size: 17px; line-height: 1.5; position: relative;">
+      "Absolutely exquisite! The flavors and ambiance made our anniversary unforgettable."
+      <footer style="margin-top: 15px; font-weight:700; color:#c9a66b; font-style: normal;">— Sarah M.</footer>
+    </blockquote>
+    <blockquote tabindex="0" style="background:#282828; padding: 25px 30px; border-radius: 20px; max-width: 320px; box-shadow: 0 8px 30px rgba(201,166,107,0.12); color:#d9d7ce; font-style: italic; font-size: 17px; line-height: 1.5; position: relative;">
+      "The Wagyu steak was melt-in-mouth amazing. Service was impeccable too!"
+      <footer style="margin-top: 15px; font-weight:700; color:#c9a66b; font-style: normal;">— James R.</footer>
+    </blockquote>
+    <blockquote tabindex="0" style="background:#282828; padding: 25px 30px; border-radius: 20px; max-width: 320px; box-shadow: 0 8px 30px rgba(201,166,107,0.12); color:#d9d7ce; font-style: italic; font-size: 17px; line-height: 1.5; position: relative;">
+      "An elegant place with a menu that surprises your palate at every bite."
+      <footer style="margin-top: 15px; font-weight:700; color:#c9a66b; font-style: normal;">— Aisha K.</footer>
+    </blockquote>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section id="gallery" aria-label="Photo Gallery" style="margin-top: 90px; text-align:center;">
+  <h2 style="font-family:'Playfair Display', serif; font-size: 38px; color: #c9a66b; margin-bottom: 30px; letter-spacing: 2px;">Gallery</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 22px; padding: 0 15px;">
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Elegant plated steak dish" style="width:100%; border-radius: 20px; filter: brightness(0.92); box-shadow: 0 6px 20px rgba(201,166,107,0.18); object-fit: cover; height: 160px;">
+    <img src="https://images.unsplash.com/photo-1543353071-087092ec3937?auto=format&fit=crop&w=600&q=80" alt="Grilled salmon dish" style="width:100%; border-radius: 20px; filter: brightness(0.92); box-shadow: 0 6px 20px rgba(201,166,107,0.18); object-fit: cover; height: 160px;">
+    <img src="https://images.unsplash.com/photo-1555992336-03a23c46aa16?auto=format&fit=crop&w=600&q=80" alt="Luxury restaurant interior" style="width:100%; border-radius: 20px; filter: brightness(0.92); box-shadow: 0 6px 20px rgba(201,166,107,0.18); object-fit: cover; height: 160px;">
+    <img src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=600&q=80" alt="Gourmet dessert plate" style="width:100%; border-radius: 20px; filter: brightness(0.92); box-shadow: 0 6px 20px rgba(201,166,107,0.18); object-fit: cover; height: 160px;">
+  </div>
+</section>
+
+<!-- Contact Section already provided in previous code -->
+
 </main>
 
-<script>
-  // Carousel JS
-  const slides = document.getElementById('slides');
-  const buttons = document.querySelectorAll('#nav-buttons button');
-  let currentIndex = 0;
-
-  function goToSlide(index) {
-    slides.style.transform = `translateX(-${index * 20}%)`;
-    buttons.forEach(btn => btn.classList.remove('active'));
-    buttons[index].classList.add('active');
-    currentIndex = index;
-  }
-
-  buttons.forEach((btn, i) => {
-    btn.addEventListener('click', () => goToSlide(i));
-  });
-
-  // Auto slide every 4 seconds
-  setInterval(() => {
-    let nextIndex = (currentIndex + 1) % buttons.length;
-    goToSlide(nextIndex);
-  }, 4000);
-</script>
-
-</body>
-</html>
+<!-- Footer -->
+<footer>
+  &copy; 2025 Golden Spoon. All rights reserved. &nbsp;&nbsp;
+  <a href="https://www.facebook.com" target="_blank" rel="noopener" style="color:#c9a66b; text-decoration:none; margin:0 10px;" aria-label="Facebook">&#x25B6; FB</a> |
+  <a href="https://www.instagram.com" target="_blank" rel="noopener" style="color:#c9a66b; text-decoration:none; margin:0 10px;" aria-label="Instagram">&#x25B6; IG</a> |
+  <a href="https://www.twitter.com" target="_blank" rel="noopener" style="color:#c9a66b; text-decoration:none; margin:0 10px;" aria-label="Twitter">&#x25B6; TW</a>
+</footer>
