@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Restaurant Landing Page</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+  /* Reset */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+
+  body, html {
+    height: 100%;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #f7d9aa 0%, #fdd9b5 100%);
+    color: #8b4513;
+  }
+
+  header {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+  }
+
+  header .logo {
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 2px;
+    cursor: default;
+  }
+
+  nav a {
+    color: #8b4513;
+    text-decoration: none;
+    margin-left: 30px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  nav a:hover {
+    color: #e29c67;
+  }
+
+  main {
+    margin-top: 70px; /* header height + some spacing */
+  }
+
+  /* Hero carousel styles */
+  .hero {
+    position: relative;
+    width: 100vw;
+    height: 80vh;
+    overflow: hidden;
+    max-height: 700px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  }
+
+  .slides {
+    display: flex;
+    width: 500%; /* 5 slides */
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .slide {
+    width: 20%; /* 1/5th */
+    height: 100%;
+    flex-shrink: 0;
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* Navigation buttons */
+  .nav-buttons {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+  }
+
+  .nav-buttons button {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: none;
+    background: #e29c67aa;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .nav-buttons button.active,
+  .nav-buttons button:hover {
+    background: #e29c67;
+  }
+
+  /* Main content */
+  .content {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+  }
+  .content h2 {
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+  .content p {
+    font-size: 16px;
+    color: #7d5a3a;
+    line-height: 1.5;
+  }
+
+  /* Footer */
+  footer {
+    background: rgba(255, 255, 255, 0.95);
+    text-align: center;
+    padding: 15px 20px;
+    color: #8b4513;
+    font-size: 14px;
+    border-top: 1px solid #e29c67aa;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+    margin-top: 40px;
+    font-weight: 600;
+  }
+
+  .footer-container p {
+    margin: 4px 0;
+  }
+
+  /* Responsive */
+ /* ...existing code... */
+
+@media (max-width: 900px) {
+  .content {
+    max-width: 98vw;
+    padding: 0 8px;
+  }
+  .hero {
+    height: 40vh;
+    min-height: 220px;
+    max-height: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .slide {
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 10px 8px;
+    flex-direction: column;
+    gap: 8px;
+  }
+  nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+  }
+  nav a {
+    margin: 0 8px;
+    font-size: 14px;
+  }
+  .hero {
+    height: 32vh;
+    min-height: 140px;
+    max-height: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .slides {
+    width: 500%;
+    min-width: 500vw;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+  }
+  .slide {
+    width: 20vw;
+    min-width: 100vw;
+    height: 100%;
+  }
+  .nav-buttons {
+    bottom: 8px;
+    gap: 6px;
+  }
+  .nav-buttons button {
+    width: 18px;
+    height: 18px;
+  }
+  .content {
+    padding: 0 4px;
+    font-size: 15px;
+  }
+  footer {
+    padding: 10px 4px;
+    font-size: 13px;
+  }
+}
+
+/* Optional: Hide scrollbars for slides on mobile */
+@media (max-width: 600px) {
+  .slides {
+    scrollbar-width: none; /* Firefox */
+  }
+  .slides::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Delicious Bites</div>
+  <nav>
+    <a href="#menu">Menu</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="slides" id="slides">
+      <div class="slide" style="background-image: url('https://source.unsplash.com/1200x700/?food,1');"></div>
+      <div class="slide" style="background-image: url('https://source.unsplash.com/1200x700/?food,2');"></div>
+      <div class="slide" style="background-image: url('https://source.unsplash.com/1200x700/?food,3');"></div>
+      <div class="slide" style="background-image: url('https://source.unsplash.com/1200x700/?food,4');"></div>
+      <div class="slide" style="background-image: url('https://source.unsplash.com/1200x700/?food,5');"></div>
+    </div>
+
+    <div class="nav-buttons" id="nav-buttons">
+      <button class="active"></button>
+      <button></button>
+      <button></button>
+      <button></button>
+      <button></button>
+    </div>
+  </section>
+
+  <section class="content" id="menu">
+    <h2>Welcome to Delicious Bites</h2>
+    <p>Enjoy a perfect blend of traditional and modern cuisines prepared fresh daily with love.</p>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <p>© 2025 Delicious Bites. All rights reserved.</p>
+      <p>Contact us: +123 456 7890 | info@deliciousbites.com</p>
+    </div>
+  </footer>
+</main>
+
+<script>
+  // Carousel JS
+  const slides = document.getElementById('slides');
+  const buttons = document.querySelectorAll('#nav-buttons button');
+  let currentIndex = 0;
+
+  function goToSlide(index) {
+    slides.style.transform = `translateX(-${index * 20}%)`;
+    buttons.forEach(btn => btn.classList.remove('active'));
+    buttons[index].classList.add('active');
+    currentIndex = index;
+  }
+
+  buttons.forEach((btn, i) => {
+    btn.addEventListener('click', () => goToSlide(i));
+  });
+
+  // Auto slide every 4 seconds
+  setInterval(() => {
+    let nextIndex = (currentIndex + 1) % buttons.length;
+    goToSlide(nextIndex);
+  }, 4000);
+</script>
+
+</body>
+</html>

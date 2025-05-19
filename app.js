@@ -98,6 +98,27 @@ document.querySelector('#loginBox form').addEventListener('submit', function(e) 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //   function showSignup() {
 //     document.getElementById('loginBox').style.display = 'none';
 //     document.getElementById('signupBox').style.display = 'block';
