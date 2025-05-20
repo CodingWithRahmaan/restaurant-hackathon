@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login & Signup Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      min-height: 100vh;
+      background: #1c1c1c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #d9d7ce;
+    }
+
+    .container {
+      width: 370px;
+      background: #282828;
+      padding: 40px 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(201, 166, 107, 0.15);
+      position: relative;
+      transition: box-shadow 0.3s ease-in-out;
+      border: 1px solid #3a3a3a;
+    }
+
+    .container:hover {
+      box-shadow: 0 12px 40px rgba(201, 166, 107, 0.25);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #c9a66b;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-group i {
+      position: absolute;
+      left: -25px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #c9a66b;
+      font-size: 16px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 14px 0px;
+      border: 1.5px solid #3a3a3a;
+      border-radius: 8px;
+      background: #1c1c1c;
+      font-size: 15px;
+      color: #f5f1e9;
+    }
+
+    .input-group input:focus {
+      border: 1.5px solid #c9a66b;
+      outline: none;
+      background: #242424;
+    }
+
+    .btn {
+      width: 100%;
+      background: transparent;
+      color: #c9a66b;
+      padding: 12px;
+      border: 2px solid #c9a66b;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 599;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(201, 166, 107, 0.2);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #c9a66b;
+      color: #1c1c1c;
+      box-shadow: 0 4px 16px rgba(201, 166, 107, 0.35);
+    }
+
+    .toggle {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 15px;
+      color: #aaa08a;
+    }
+
+    .toggle a {
+      color: #c9a66b;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .toggle a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: 92vw;
+        padding: 22px 8vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="loginBox">
+    <h2>Login</h2>
+    <form>
+      <div class="input-group">
+        <i class="fa fa-envelope"></i>
+        <input placeholder="Email or Username" required>
+      </div>
+      <div class="input-group">
+        <i class="fa fa-lock"></i>
+        <input type="password" placeholder="Password" required>
+      </div>
+      <button class="btn" type="submit">Login</button>
+    </form>
+    <div class="toggle">
+      Don't have an account? <a href="#" onclick="showSignup()">Sign up</a>
+    </div>
+  </div>
+
+  <div class="container" id="signupBox" style="display:none;">
+    <h2>Sign Up</h2>
+    <form>
+      <div class="input-group">
+        <i class="fa fa-user"></i>
+        <input type="text" placeholder="Full Name" required>
+      </div>
+      <div class="input-group">
+        <i class="fa fa-envelope"></i>
+        <input id="signEmail" placeholder="Email or Username" required>
+      </div>
+      <div class="input-group">
+        <i class="fa fa-lock"></i>
+        <input type="password" placeholder="Password" required>
+      </div>
+      <button class="btn" type="submit">Sign Up</button>
+    </form>
+    <div class="toggle">
+      Already have an account? <a href="#" onclick="showLogin()">Login</a>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script src="app.js">
+    
+    
+    
+  </script>
+
+</body>
+</html>

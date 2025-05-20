@@ -61,7 +61,7 @@ document.querySelector('#loginBox form').addEventListener('submit', function(e) 
             timer: 1500,
             confirmButtonText: 'OK'
         }).then(function() {
-            window.location.href = 'dashboard.html';
+            window.location.href = 'main.html';
         });
     } else {
         Swal.fire({
