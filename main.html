@@ -6,10 +6,7 @@
 <title>Golden Spoon - Luxury Dining</title>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
 <style>
-  /* Reset */
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   body, html {
     height: 100%;
     font-family: 'Lato', sans-serif;
@@ -17,15 +14,11 @@
     color: #f5f1e9;
     scroll-behavior: smooth;
   }
-
-  /* Container */
   .container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 20px;
   }
-
-  /* Header */
   header {
     position: sticky;
     top: 0; left: 0; right: 0;
@@ -74,13 +67,10 @@
   nav a:focus::after {
     width: 100%;
   }
-
   main {
     padding-top: 110px;
     padding-bottom: 70px;
   }
-
-  /* Hero Section */
   .hero {
     display: flex;
     align-items: center;
@@ -144,8 +134,6 @@
     object-fit: cover;
     filter: brightness(0.95);
   }
-
-  /* --- Carousel Section --- */
   .carousel {
     position: relative;
     width: 100%;
@@ -184,13 +172,11 @@
     padding: 0 30px;
     text-align: center;
   }
-  /* Example backgrounds for demo (replace with your images/content) */
   .slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80'); }
   .slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1543353071-087092ec3937?auto=format&fit=crop&w=900&q=80'); }
   .slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1555992336-03a23c46aa16?auto=format&fit=crop&w=900&q=80'); }
   .slide:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=900&q=80'); }
   .slide:nth-child(5) { background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=900&q=80'); }
-
   .slide::before {
     content: "";
     position: absolute;
@@ -204,7 +190,6 @@
     position: relative;
     z-index: 2;
   }
-
   .nav-buttons {
     position: absolute;
     top: 50%;
@@ -234,7 +219,6 @@
     color: #181818;
     transform: scale(1.08);
   }
-
   .dots {
     position: absolute;
     bottom: 22px;
@@ -259,7 +243,6 @@
     border-color: #fffbe6;
     transform: scale(1.18);
   }
-
   @media (max-width: 900px) {
     .carousel {
       height: 240px;
@@ -295,8 +278,6 @@
       padding: 6px 12px;
     }
   }
-
-  /* Menu Section */
   #menu {
     margin-top: 80px;
     text-align: center;
@@ -363,8 +344,6 @@
     font-size: 20px;
     color: #c9a66b;
   }
-
-  /* About Section */
   #about {
     max-width: 720px;
     margin: 90px auto 80px auto;
@@ -382,8 +361,6 @@
     font-size: 18px;
     line-height: 1.7;
   }
-
-  /* Contact Section */
   #contact {
     max-width: 720px;
     margin: 0 auto 80px auto;
@@ -410,12 +387,9 @@
   #contact a:focus {
     text-decoration: underline;
   }
-
-  /* Footer */
   #contact{
     width: 100%;
     text-align: center;
-    /* background-color: #010000; */
     padding: 28px 20px;
     border-top: 1px solid #3a3a3a;
     color: #7b7156;
@@ -423,8 +397,6 @@
     font-weight: 600;
     letter-spacing: 1px;
   }
-
-  /* Responsive for rest of the page */
   @media (max-width: 900px) {
     header {
       padding: 20px 15px;
@@ -499,7 +471,7 @@
   <nav aria-label="Primary navigation">
     <a href="#menu">Menu</a>
     <a href="#testimonials">Testimonials</a>
-        <a href="#contact">Contact</a> 
+    <a href="#contact">Contact</a> 
     <a onclick="window.location.href='index.html'">Logout</a>
   </nav>
 </header>
@@ -550,51 +522,18 @@
         </div>
       </div>
     </div>
-
     <div class="nav-buttons">
       <button onclick="prevSlide()" aria-label="Previous Slide">❮</button>
       <button onclick="nextSlide()" aria-label="Next Slide">❯</button>
     </div>
-
     <div class="dots" id="dots"></div>
   </div>
 
   <section id="menu" aria-label="Menu section">
     <h2>Signature Dishes</h2>
     <p>Handpicked dishes that define our culinary artistry and passion.</p>
-    <div class="menu-cards">
-      <article class="card" tabindex="0">
-        <img src="https://www.foodiecrush.com/wp-content/uploads/2024/03/Pan-Seared-Salmon-with-Basil-Gremolata-foodiecrush.com-1.jpg" alt="Seared Salmon with herbs" />
-        <div class="card-content">
-          <h3>Seared Salmon</h3>
-          <p>Fresh Atlantic salmon seared to perfection with lemon herb butter.</p>
-          <div class="price">$32</div>
-        </div>
-      </article>
-      <article class="card" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Tender Wagyu Steak" />
-        <div class="card-content">
-          <h3>Wagyu Steak</h3>
-          <p>Tender Wagyu beef steak, grilled and served with truffle mashed potatoes.</p>
-          <div class="price">$48</div>
-        </div>
-      </article>
-      <article class="card" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1543353071-087092ec3937?auto=format&fit=crop&w=400&q=80" alt="Gourmet Salad" />
-        <div class="card-content">
-          <h3>Gourmet Salad</h3>
-          <p>Organic greens, candied pecans, goat cheese, and raspberry vinaigrette.</p>
-          <div class="price">$18</div>
-        </div>
-      </article>
-      <article class="card" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1555992336-03a23c46aa16?auto=format&fit=crop&w=400&q=80" alt="Luxury Dessert" />
-        <div class="card-content">
-          <h3>Luxury Dessert</h3>
-          <p>Decadent chocolate mousse with gold leaf and fresh berries.</p>
-          <div class="price">$22</div>
-        </div>
-      </article>
+    <div class="menu-cards" id="dynamicMenuCards">
+      <!-- Dynamic menu items will be injected here from localStorage -->
     </div>
   </section>
 
@@ -653,12 +592,65 @@
   </div>
 </footer>
 
+<script>
+// Carousel logic (unchanged)
+let currentSlide = 0;
+const slides = document.getElementById("slides");
+const dotsContainer = document.getElementById("dots");
+const totalSlides = slides.children.length;
+for (let i = 0; i < totalSlides; i++) {
+  const dot = document.createElement("span");
+  dot.onclick = () => moveToSlide(i);
+  dotsContainer.appendChild(dot);
+}
+function updateCarousel() {
+  slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+  Array.from(dotsContainer.children).forEach((dot, index) => {
+    dot.classList.toggle("active", index === currentSlide);
+  });
+}
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % totalSlides;
+  updateCarousel();
+}
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+  updateCarousel();
+}
+function moveToSlide(index) {
+  currentSlide = index;
+  updateCarousel();
+}
+updateCarousel();
+setInterval(nextSlide, 5000);
 
-
-
-
-
-
+// --- Dynamic Menu Cards from localStorage (dashboard.html categoriesList) ---
+function renderMenuFromLocalStorage() {
+  const menuCards = document.getElementById('dynamicMenuCards');
+  if (!menuCards) return;
+  let categoriesList = [];
+  try {
+    categoriesList = JSON.parse(localStorage.getItem("categoriesList")) || [];
+  } catch (e) {
+    categoriesList = [];
+  }
+  if (!Array.isArray(categoriesList) || categoriesList.length === 0) {
+    menuCards.innerHTML = "<p style='color:#888;'>No menu items available yet.</p>";
+    return;
+  }
+  menuCards.innerHTML = categoriesList.map(cat => `
+    <article class="card" tabindex="0">
+      ${cat.image ? `<img src="${cat.image}" alt="${cat.name}" />` : ''}
+      <div class="card-content">
+        <h3>${cat.name || ''}</h3>
+        <p>${cat.description || ''}</p>
+        <div class="price">${cat.price ? 'Rs. ' + cat.price : ''}</div>
+      </div>
+    </article>
+  `).join('');
+}
+window.addEventListener('DOMContentLoaded', renderMenuFromLocalStorage);
+</script>
 <script src="main.js"></script>
 </body>
 </html>
