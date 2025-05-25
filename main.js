@@ -6,6 +6,7 @@ function setLastSection(section) {
 // Load categories from localStorage if available
 let categoriesList = JSON.parse(localStorage.getItem("categoriesList")) || [];
 
+// Each category will be an object: { name, description, price, image }
 function showSection(section) {
   setLastSection(section);
   const main = document.getElementById("mainContent");
@@ -44,11 +45,10 @@ function showSection(section) {
     `;
   } else if (section === "categories") {
     main.innerHTML = `
-      <div class="header">Manage Menu</div>
+      <div class="header">Manage Menu Items</div>
       <div class="card">
         <h3><i class="fa fa-list"></i> Add New Item</h3>
-        <input type="text" id="categoryInput" placeholder="Enter category name" style="padding:8px;width:80%;margin-bottom:10px;" />
-        <button onclick="addCategory()" style="padding:8px 12px;background:#c9a66b;color:#fff;border:none;border-radius:5px;">Add</button>
+        <button onclick="addCategoryPrompt()" style="padding:8px 12px;background:#c9a66b;color:#fff;border:none;border-radius:5px;">Add New Item</button>
       </div>
       <div class="category-cards-container"></div>
     `;
@@ -56,42 +56,74 @@ function showSection(section) {
   }
 }
 
-function addCategory() {
-  const input = document.getElementById("categoryInput");
-  const category = input.value.trim();
-  if (category !== "") {
-    categoriesList.push(category);
-    localStorage.setItem("categoriesList", JSON.stringify(categoriesList));
-    input.value = "";
-    renderCategoryCards();
-  }
-}
-
-// SweetAlert edit prompt
-function editCategory(index) {
+// SweetAlert2 prompt for adding a new item
+function addCategoryPrompt() {
   Swal.fire({
-    title: 'Edit category name',
-    input: 'text',
-    inputValue: categoriesList[index],
+    title: 'Add New Menu Item',
+    html:
+      `<input id="swal-input1" class="swal2-input" placeholder="Item Name">
+      <input id="swal-input2" class="swal2-input" placeholder="Description">
+      <input id="swal-input3" class="swal2-input" placeholder="Price (e.g. 499)">
+      <input id="swal-input4" class="swal2-input" placeholder="Image URL (optional)">`,
+    focusConfirm: false,
     showCancelButton: true,
-    confirmButtonText: 'Save',
-    cancelButtonText: 'Cancel',
-    inputValidator: (value) => {
-      if (!value.trim()) {
-        return 'Category name cannot be empty!';
+    confirmButtonText: 'Add',
+    preConfirm: () => {
+      const name = document.getElementById('swal-input1').value.trim();
+      const desc = document.getElementById('swal-input2').value.trim();
+      const price = document.getElementById('swal-input3').value.trim();
+      const img = document.getElementById('swal-input4').value.trim();
+      if (!name || !desc || !price || !img) {
+        Swal.showValidationMessage('Name, Description, and Price are required!');
+        return false;
       }
+      return { name, description: desc, price, image: img };
     }
   }).then((result) => {
-    if (result.isConfirmed && result.value.trim() !== "") {
-      categoriesList[index] = result.value.trim();
+    if (result.isConfirmed && result.value) {
+      categoriesList.push(result.value);
       localStorage.setItem("categoriesList", JSON.stringify(categoriesList));
       renderCategoryCards();
-      Swal.fire('Updated!', 'Category name has been updated.', 'success');
+      Swal.fire('Added!', 'Menu item has been added.', 'success');
     }
   });
 }
 
-// SweetAlert delete confirm
+// SweetAlert2 edit prompt
+function editCategory(index) {
+  const cat = categoriesList[index];
+  Swal.fire({
+    title: 'Edit Menu Item',
+    html:
+      `<input id="swal-input1" class="swal2-input" placeholder="Item Name" value="${cat.name || ''}">
+      <input id="swal-input2" class="swal2-input" placeholder="Description" value="${cat.description || ''}">
+      <input id="swal-input3" class="swal2-input" placeholder="Price" value="${cat.price || ''}">
+      <input id="swal-input4" class="swal2-input" placeholder="Image URL" value="${cat.image || ''}">`,
+    focusConfirm: false,
+    showCancelButton: true,
+    confirmButtonText: 'Save',
+    preConfirm: () => {
+      const name = document.getElementById('swal-input1').value.trim();
+      const desc = document.getElementById('swal-input2').value.trim();
+      const price = document.getElementById('swal-input3').value.trim();
+      const img = document.getElementById('swal-input4').value.trim();
+      if (!name || !desc || !price) {
+        Swal.showValidationMessage('Name, Description, and Price are required!');
+        return false;
+      }
+      return { name, description: desc, price, image: img };
+    }
+  }).then((result) => {
+    if (result.isConfirmed && result.value) {
+      categoriesList[index] = result.value;
+      localStorage.setItem("categoriesList", JSON.stringify(categoriesList));
+      renderCategoryCards();
+      Swal.fire('Updated!', 'Menu item has been updated.', 'success');
+    }
+  });
+}
+
+// SweetAlert2 delete confirm
 function deleteCategory(index) {
   Swal.fire({
     title: 'Are you sure?',
@@ -107,7 +139,7 @@ function deleteCategory(index) {
       categoriesList.splice(index, 1);
       localStorage.setItem("categoriesList", JSON.stringify(categoriesList));
       renderCategoryCards();
-      Swal.fire('Deleted!', 'Category has been deleted.', 'success');
+      Swal.fire('Deleted!', 'Menu item has been deleted.', 'success');
     }
   });
 }
@@ -116,15 +148,17 @@ function renderCategoryCards() {
   const container = document.querySelector(".category-cards-container");
   if (!container) return;
   if (categoriesList.length === 0) {
-    container.innerHTML = "<p style='color:#888;'>No categories added yet.</p>";
+    container.innerHTML = "<p style='color:#888;'>No menu items added yet.</p>";
     return;
   }
   container.innerHTML = `
     <div style="display:flex;flex-wrap:wrap;gap:18px;">
       ${categoriesList.map((cat, idx) => `
-        <div class="card" style="min-width:180px;flex:1 1 180px;max-width:220px;box-sizing:border-box;position:relative;">
-          <h3 style="color:#c9a66b;font-size:18px;"><i class="fa fa-tag"></i> ${cat}</h3>
-          <p style="font-size:13px;color:#777;">Category #${idx + 1}</p>
+        <div class="card" style="min-width:220px;flex:1 1 220px;max-width:260px;box-sizing:border-box;position:relative;">
+          ${cat.image ? `<img src="${cat.image}" alt="${cat.name}" style="width:100%;height:120px;object-fit:cover;border-radius:8px 8px 0 0;margin-bottom:10px;">` : ''}
+          <h3 style="color:#c9a66b;font-size:18px;"><i class="fa fa-tag"></i> ${cat.name || ''}</h3>
+          <p style="font-size:13px;color:#777;min-height:38px;">${cat.description || ''}</p>
+          <div style="font-weight:bold;color:#333;margin-bottom:8px;">${cat.price ? 'Rs. ' + cat.price : ''}</div>
           <button onclick="editCategory(${idx})" style="position:absolute;top:12px;right:44px;background:#f3ede2;color:#c9a66b;border:none;border-radius:4px;padding:3px 8px;cursor:pointer;font-size:13px;"><i class="fa fa-edit"></i></button>
           <button onclick="deleteCategory(${idx})" style="position:absolute;top:12px;right:8px;background:#ffeaea;color:#d9534f;border:none;border-radius:4px;padding:3px 8px;cursor:pointer;font-size:13px;"><i class="fa fa-trash"></i></button>
         </div>
@@ -138,7 +172,6 @@ window.onload = function() {
   const lastSection = localStorage.getItem('lastSection') || 'dashboard';
   showSection(lastSection);
 };
-
 
 
 
