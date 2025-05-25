@@ -412,8 +412,10 @@
   }
 
   /* Footer */
-  footer {
+  #contact{
+    width: 100%;
     text-align: center;
+    /* background-color: #010000; */
     padding: 28px 20px;
     border-top: 1px solid #3a3a3a;
     color: #7b7156;
@@ -496,8 +498,8 @@
   <div class="logo" aria-label="Golden Spoon Restaurant Logo">Grilled Protein</div>
   <nav aria-label="Primary navigation">
     <a href="#menu">Menu</a>
-    <a href="#contact">Contact</a>  
     <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a> 
     <a onclick="window.location.href='index.html'">Logout</a>
   </nav>
 </header>
@@ -629,50 +631,34 @@
 </main>
 
 <!-- Footer -->
-<footer>
-  &copy; 2025 Golden Spoon. All rights reserved. &nbsp;&nbsp;
-  <a href="https://www.facebook.com" target="_blank" rel="noopener" style="color:#c9a66b; text-decoration:none; margin:0 10px;" aria-label="Facebook">&#x25B6; FB</a> |
-  <a href="https://www.instagram.com" target="_blank" rel="noopener" style="color:#c9a66b; text-decoration:none; margin:0 10px;" aria-label="Instagram">&#x25B6; IG</a> |
-  <a href="https://www.twitter.com" target="_blank" rel="noopener" style="color:#c9a66b; text-decoration:none; margin:0 10px;" aria-label="Twitter">&#x25B6; TW</a>
+<footer id="contact">
+  <div style="max-width:900px;margin:0 auto;">
+    <div style=";font-size:18px; color:#c9a66b; margin-bottom:10px; font-family:'Playfair Display',serif;">
+      Golden Spoon Restaurant & Lounge
+    </div>
+    <div style="margin-bottom:12px; color:#d9d7ce;">
+      Experience luxury dining with a curated menu, elegant ambiance, and exceptional service.<br>
+      Visit us: <span style="color:#c9a66b;">123 Gourmet Avenue, Food City</span> &nbsp;|&nbsp; 
+      Call: <a href="tel:+1234567890" style="color:#c9a66b; text-decoration:none;">+1 234 567 890</a> &nbsp;|&nbsp; 
+      Email: <a href="mailto:info@goldenspoon.com" style="color:#c9a66b; text-decoration:none;">info@goldenspoon.com</a>
+    </div>
+    <div style="margin-bottom:10px;">
+      <a href="https://www.facebook.com" target="_blank" rel="noopener" style="color:#c9a66b; text-decoration:none; margin:0 10px;" aria-label="Facebook">&#x25B6; Facebook</a> |
+      <a href="https://www.instagram.com" target="_blank" rel="noopener" style="color:#c9a66b; text-decoration:none; margin:0 10px;" aria-label="Instagram">&#x25B6; Instagram</a> |
+      <a href="https://www.twitter.com" target="_blank" rel="noopener" style="color:#c9a66b; text-decoration:none; margin:0 10px;" aria-label="Twitter">&#x25B6; Twitter</a>
+    </div>
+    <div style="color:#7b7156; font-size:15px; margin-top:8px;">
+      &copy; 2025 Golden Spoon. All rights reserved.
+    </div>
+  </div>
 </footer>
 
-<script>
-let currentSlide = 0;
-const slides = document.getElementById("slides");
-const dotsContainer = document.getElementById("dots");
-const totalSlides = slides.children.length;
 
-// Create dots
-for (let i = 0; i < totalSlides; i++) {
-  const dot = document.createElement("span");
-  dot.onclick = () => moveToSlide(i);
-  dotsContainer.appendChild(dot);
-}
 
-function updateCarousel() {
-  slides.style.transform = `translateX(-${currentSlide * 100}%)`;
-  Array.from(dotsContainer.children).forEach((dot, index) => {
-    dot.classList.toggle("active", index === currentSlide);
-  });
-}
 
-function nextSlide() {
-  currentSlide = (currentSlide + 1) % totalSlides;
-  updateCarousel();
-}
 
-function prevSlide() {
-  currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-  updateCarousel();
-}
 
-function moveToSlide(index) {
-  currentSlide = index;
-  updateCarousel();
-}
 
-updateCarousel();
-setInterval(nextSlide, 5000); // Auto-slide every 5 sec
-</script>
+<script src="main.js"></script>
 </body>
 </html>

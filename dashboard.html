@@ -35,10 +35,9 @@
     }
 
     .sidebar button {
-        height: 50px;
-        width: 180px;
-              background: #ffffff;
-
+      height: 50px;
+      width: 180px;
+      background: #ffffff;
       display: block;
       color: #333;
       padding: 6px;
@@ -48,7 +47,6 @@
       text-decoration: none;
       font-weight: 500;
       transition: 0.2s;
-        
     }
 
     .sidebar button:hover {
@@ -57,7 +55,7 @@
     }
 
     .sidebar button i {
-      margin-right: 4   px;
+      margin-right: 4px;
       color: #c9a66b;
     }
 
@@ -107,13 +105,14 @@
 
   <div class="sidebar">
     <h2>Admin</h2>
-    <button><i class="fa fa-tachometer-alt"></i> Dashboard</button>
-    <button><i class="fa fa-users"></i> Users</button>
-    <button><i class="fa fa-cogs"></i> Settings</button>
+    <button onclick="showSection('dashboard')"><i class="fa fa-tachometer-alt"></i> Dashboard</button>
+    <button onclick="showSection('users')"><i class="fa fa-users"></i> Users</button>
+    <button onclick="showSection('settings')"><i class="fa fa-cogs"></i> Settings</button>
+    <button onclick="showSection('categories')"><i class="fa fa-list"></i> Categories</button>
     <button onclick="window.location.href='index.html'"><i class="fa fa-sign-out-alt"></i> Logout</button>
   </div>
 
-  <div class="main">
+  <div class="main" id="mainContent">
     <div class="header">Dashboard Overview</div>
 
     <div class="card">
@@ -132,6 +131,9 @@
     </div>
   </div>
 
+
+  <script src="main.js"></script>
+
+
 </body>
 </html>
-
