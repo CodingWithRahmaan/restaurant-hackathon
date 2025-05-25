@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Golden Spoon - Luxury Dining</title>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body, html {
@@ -66,6 +67,23 @@
   nav a:hover::after,
   nav a:focus::after {
     width: 100%;
+  }
+  #cartBtn {
+    position: relative;
+    margin-left: 40px;
+  }
+  #cartCount {
+    background:#c9a66b;
+    color:#fff;
+    border-radius:50%;
+    padding:2px 7px;
+    font-size:13px;
+    position:absolute;
+    top:-8px;
+    right:-25px;
+    min-width:22px;
+    text-align:center;
+    font-weight:700;
   }
   main {
     padding-top: 110px;
@@ -471,8 +489,13 @@
   <nav aria-label="Primary navigation">
     <a href="#menu">Menu</a>
     <a href="#testimonials">Testimonials</a>
-    <a href="#contact">Contact</a> 
+    <a href="#contact">Contact</a>
     <a onclick="window.location.href='index.html'">Logout</a>
+    <a href="#" id="cartBtn" style="position:relative;">
+      <i class="fa fa-shopping-cart"></i>
+      <span id="cartCount">0</span>
+      Cart
+    </a>
   </nav>
 </header>
 
@@ -556,17 +579,6 @@
   </div>
 </section>
 
-<!-- Gallery Section -->
-<section id="gallery" aria-label="Photo Gallery" style="margin-top: 90px; text-align:center;">
-  <h2 style="font-family:'Playfair Display', serif; font-size: 38px; color: #c9a66b; margin-bottom: 30px; letter-spacing: 2px;">Gallery</h2>
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 22px; padding: 0 15px;">
-    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Elegant plated steak dish" style="width:100%; border-radius: 20px; filter: brightness(0.92); box-shadow: 0 6px 20px rgba(201,166,107,0.18); object-fit: cover; height: 160px;">
-    <img src="https://images.unsplash.com/photo-1543353071-087092ec3937?auto=format&fit=crop&w=600&q=80" alt="Grilled salmon dish" style="width:100%; border-radius: 20px; filter: brightness(0.92); box-shadow: 0 6px 20px rgba(201,166,107,0.18); object-fit: cover; height: 160px;">
-    <img src="https://images.unsplash.com/photo-1555992336-03a23c46aa16?auto=format&fit=crop&w=600&q=80" alt="Luxury restaurant interior" style="width:100%; border-radius: 20px; filter: brightness(0.92); box-shadow: 0 6px 20px rgba(201,166,107,0.18); object-fit: cover; height: 160px;">
-    <img src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=600&q=80" alt="Gourmet dessert plate" style="width:100%; border-radius: 20px; filter: brightness(0.92); box-shadow: 0 6px 20px rgba(201,166,107,0.18); object-fit: cover; height: 160px;">
-  </div>
-</section>
-
 </main>
 
 <!-- Footer -->
@@ -592,6 +604,7 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 // Carousel logic (unchanged)
 let currentSlide = 0;
@@ -638,8 +651,8 @@ function renderMenuFromLocalStorage() {
     menuCards.innerHTML = "<p style='color:#888;'>No menu items available yet.</p>";
     return;
   }
-  menuCards.innerHTML = categoriesList.map(cat => `
-    <article class="card" tabindex="0">
+  menuCards.innerHTML = categoriesList.map((cat, idx) => `
+    <article class="card menu-card-clickable" tabindex="0" data-idx="${idx}">
       ${cat.image ? `<img src="${cat.image}" alt="${cat.name}" />` : ''}
       <div class="card-content">
         <h3>${cat.name || ''}</h3>
@@ -648,9 +661,161 @@ function renderMenuFromLocalStorage() {
       </div>
     </article>
   `).join('');
+
+  // Add click event to each card for modal view
+  document.querySelectorAll('.menu-card-clickable').forEach(card => {
+    card.addEventListener('click', function () {
+      const idx = this.getAttribute('data-idx');
+      const item = categoriesList[idx];
+      showMenuModal(item);
+    });
+  });
 }
-window.addEventListener('DOMContentLoaded', renderMenuFromLocalStorage);
+
+// --- Cart logic ---
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  document.getElementById('cartCount').textContent = cart.length;
+}
+function showCartModal() {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  if (window.Swal) {
+    if (cart.length === 0) {
+      Swal.fire({
+        icon: 'info',
+        title: 'Cart',
+        html: '<div style="color:#888;">Your cart is empty.</div>',
+        width: 500,
+        background: "#282828"
+      });
+      return;
+    }
+    Swal.fire({
+      title: 'Your Cart',
+      html: `
+        <div id="cart-items-list" style="max-height:350px;overflow-y:auto;">
+          ${cart.map((item, idx) => `
+            <div style="display:flex;align-items:center;gap:15px;margin-bottom:18px;background:#222;padding:12px 10px;border-radius:10px;position:relative;">
+              ${item.image ? `<img src="${item.image}" alt="${item.name}" style="width:60px;height:60px;object-fit:cover;border-radius:8px;">` : ''}
+              <div style="flex:1;">
+                <div style="font-weight:700;color:#c9a66b;font-size:17px;">${item.name || ''}</div>
+                <div style="color:#d9d7ce;font-size:14px;">${item.description || ''}</div>
+                <div style="color:#fff;font-size:15px;">${item.price ? 'Rs. ' + item.price : ''}</div>
+              </div>
+              <button class="cart-delete-btn" data-idx="${idx}" style="background:#d9534f;border:none;color:#fff;border-radius:5px;padding:4px 10px;cursor:pointer;font-size:14px;position:absolute;top:10px;right:10px;">Delete</button>
+            </div>
+          `).join('')}
+        </div>
+        <div style="margin-top:10px;font-weight:700;color:#c9a66b;font-size:18px;">
+          Total: Rs. ${cart.reduce((sum, item) => sum + (parseFloat(item.price) || 0), 0)}
+        </div>
+      `,
+      showCloseButton: true,
+      showConfirmButton: false,
+      width: 600,
+      background: "#282828",
+      didOpen: () => {
+        document.querySelectorAll('.cart-delete-btn').forEach(btn => {
+          btn.onclick = function(e) {
+            e.stopPropagation();
+            const idx = parseInt(this.getAttribute('data-idx'));
+            cart.splice(idx, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();  
+            Swal.close();
+            showCartModal();
+          };
+        });
+      }
+    });
+  } else {
+    alert(cart.length ? cart.map(i => `${i.name} - Rs. ${i.price}`).join('\n') : 'Cart is empty');
+  }
+}
+function addToCart(item) {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  // Check if item already exists in cart (by name, or use a unique id if available)
+  const alreadyInCart = cart.some(i => i.name === item.name && i.price === item.price);
+  if (alreadyInCart) {
+    if (window.Swal) {
+      Swal.fire({
+        icon: 'info',
+        title: 'Already in Cart',
+        text: `"${item.name}" is already in your cart.`,
+        timer: 1200,
+        showConfirmButton: false
+      });
+    } else {
+      alert('This item is already in your cart!');
+    }
+    return;
+  }
+  cart.push(item);
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartCount();
+  if (window.Swal) {
+    Swal.fire({
+      icon: 'success',
+      title: 'Added to Cart!',
+      text: `"${item.name}" has been added to your cart.`,
+      timer: 1200,
+      showConfirmButton: false
+    });
+  } else {
+    alert('Added to cart!');
+  }
+}
+// Modal function (uses SweetAlert2 if available, else fallback)
+function showMenuModal(item) {
+  if (window.Swal) {
+    Swal.fire({
+      title: item.name || 'Menu Item',
+      html: `
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          ${item.image ? `<img src="${item.image}" alt="${item.name}" style="width:100%;max-width:600px;min-width:350px;height:auto;border-radius:18px;box-shadow:0 4px 24px #0002;margin-bottom:18px;">` : ''}
+          <div style="font-size:24px;color:#c9a66b;font-weight:700;margin-bottom:10px;">${item.price ? 'Rs. ' + item.price : ''}</div>
+          <div style="color:#444;font-size:18px;margin-bottom:22px;">${item.description || ''}</div>
+          <button id="addToCartBtn" style="padding:12px 32px;background:#c9a66b;color:#fff;border:none;border-radius:8px;font-size:17px;font-weight:600;cursor:pointer;box-shadow:0 2px 8px #c9a66b33;">Add to Cart</button>
+          <div id="menu-modal-options"></div>
+        </div>
+      `,
+      showCloseButton: true,
+      showConfirmButton: false,
+      width: 650,
+      heightAuto: false,
+      background: "#282828",
+      customClass: {
+        title: 'swal2-title',
+        htmlContainer: 'swal2-html-container'
+      },
+      didOpen: () => {
+        document.getElementById('addToCartBtn').onclick = function(e) {
+          e.stopPropagation();
+          addToCart(item);
+        };
+      }
+    });
+  } else {
+    if (confirm((item.name || 'Menu Item') + '\n' + (item.price ? 'Rs. ' + item.price + '\n' : '') + (item.description || '') + '\n\nAdd to cart?')) {
+      addToCart(item);
+    }
+  }
+}
+
+// Cart button event
+document.addEventListener('DOMContentLoaded', function() {
+  updateCartCount();
+  document.getElementById('cartBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    showCartModal();
+  });
+});
+
+// Also update cart count on page load and after menu render
+window.addEventListener('DOMContentLoaded', function() {
+  renderMenuFromLocalStorage();
+  updateCartCount();
+});
 </script>
-<script src="main.js"></script>
 </body>
 </html>
